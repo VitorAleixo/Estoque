@@ -14,30 +14,61 @@ namespace Logistica.DAL
         SqlCommand cmd = null;
         public bool Validar { get; set; } = false;
 
-        public void Login (string Usuario, string SenhaCriptografada)
+        public void Login(string Usuario, string SenhaCriptografada)
         {
-            con = ConnectionFactory.getConnection();
-            con.Open();
-            string result = "";
-            cmd = new SqlCommand("SELECT Senha FROM Entregador WHERE Usuario = @Usuario;", con);
-            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+            try
+            {
+                con = ConnectionFactory.getConnection();
+                con.Open();
+                string result = "";
+                cmd = new SqlCommand("SELECT Senha FROM Usuario WHERE Usuario = @Usuario;", con);
+                cmd.Parameters.AddWithValue("@Usuario", Usuario);
 
-            SqlDataReader resultado = cmd.ExecuteReader();
-            
-            while (resultado.Read())
-            {
-               result = resultado["Senha"].ToString();             
+                SqlDataReader resultado = cmd.ExecuteReader();
+
+                while (resultado.Read())
+                {
+                    result = resultado["Senha"].ToString();
+                }
+                if (result == SenhaCriptografada)
+                {
+                    Validar = true;
+                }
+                else
+                {
+                    Validar = false;
+                }
             }
-            if (result == SenhaCriptografada)
+            catch (Exception ex)
             {
-                Validar = true;
+                throw new Exception(ex.ToString());
             }
-            else
+            finally
             {
-                Validar = false;
+                try
+                {
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+
+                try
+                {
+                    if (cmd != null)
+                    {
+                        cmd.Dispose();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
             }
-            cmd.Dispose();
-            con.Close();
         }
     }
 }

@@ -6,33 +6,24 @@ using System.Web;
 
 namespace Logistica.DAL
 {
-    public class PedidoDAO
+    public class EntregaDAO
     {
-    private SqlCommand cmd = null;
-    private SqlConnection con = null;
+        private SqlCommand cmd = null;
+        private SqlConnection con = null;
 
-    public int valor { get; set; } = 0;
-
-    public void Cadastrar(
-              int IdUsuario
-            , int IdProduto
-            , int IdEndereco
-            , DateTime DataEntrega)
-    {
-        try
+        public int valor { get; set; } = 0;
+        public void AtualizarStatus(int IdEntrega, string StatusEntrega)
         {
+            try
+            {
             con = ConnectionFactory.getConnection();
             con.Open();
 
-            cmd = new SqlCommand("INSERT INTO Pedido(IdUsuario, IdProduto, IdEndereco, DataDeEntrega) VALUES " +
-                "(@IdCliente, @IdProduto, @IdEndereco, @DataDeEntrega);", con);
+            cmd = new SqlCommand("UPDATE Entregas SET StatusEntrega = @StatusEntrega WHERE IdEntregas = @IdEntrega;", con);
 
-            cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
-            cmd.Parameters.AddWithValue("@IdProduto", IdProduto);
-            cmd.Parameters.AddWithValue("@IdEndereco", IdEndereco);
-            cmd.Parameters.AddWithValue("@DataDeEntrega", DataEntrega.ToString("yyyy/MM/dd").Replace("/","-"));
-
-
+            cmd.Parameters.AddWithValue("@IdEntrega", IdEntrega);
+            cmd.Parameters.AddWithValue("@StatusEntrega", StatusEntrega);
+           
             if (cmd.ExecuteNonQuery() == 1)
             {
                 valor = 1;
@@ -73,5 +64,5 @@ namespace Logistica.DAL
             }
         }
     }
-}
+    }
 }

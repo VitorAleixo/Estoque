@@ -8,11 +8,11 @@ namespace Logistica.Models
 {
     public class Login
     {
-        [Display(Name = "Usuario")]
+        [Display(Name = "Usuario: ")]
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Usuario { get; set; }
 
-        [Display(Name = "Senha")]
+        [Display(Name = "Senha: ")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Senha { get; set; }

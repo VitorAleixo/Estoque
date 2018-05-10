@@ -1,0 +1,32 @@
+﻿@model Logistica.Models.Rastreio
+@{
+    ViewBag.Title = "Rastreio";
+}
+
+<h2>Rastreio</h2>
+
+@using (Html.BeginForm("RastreioItem", "Rastreio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rastrear)
+            @Html.EditorFor(model => model.Rastrear)
+            @Html.ValidationMessageFor(model => model.Rastrear, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Rastrear" class="btn btn-success" />
+            </div>
+
+        </div>
+    </div>
+
+}
+
+

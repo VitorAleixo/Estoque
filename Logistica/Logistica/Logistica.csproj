@@ -144,11 +144,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RastreioController.cs" />
     <Compile Include="DAL\BuscaClienteDAO.cs" />
     <Compile Include="DAL\BuscaPedidoDAO.cs" />
     <Compile Include="DAL\BuscaProdutoDAO.cs" />
     <Compile Include="DAL\ClienteDAO.cs" />
     <Compile Include="DAL\ConnectionFactory.cs" />
+    <Compile Include="DAL\EntregaDAO.cs" />
     <Compile Include="DAL\PedidoDAO.cs" />
     <Compile Include="DAL\ProdutoDAO.cs" />
     <Compile Include="DAL\UsuarioDAO.cs" />
@@ -157,6 +159,7 @@
     </Compile>
     <Compile Include="Models\Criptografacao.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Rastreio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebService\ServicoWeb.asmx.cs">
       <DependentUpon>ServicoWeb.asmx</DependentUpon>
@@ -199,7 +202,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Login\Principal.cshtml" />
+    <Content Include="Views\Login\PrincipalEMBALAGEM.cshtml" />
+    <Content Include="Views\Login\PrincipalUSUARIO.cshtml" />
+    <Content Include="Views\Login\PrincipalERRO.cshtml" />
+    <Content Include="Views\Login\PrincipalENTREGADOR.cshtml" />
+    <Content Include="Views\Rastreio\Rastreio.cshtml" />
+    <Content Include="Views\Rastreio\RastreioItem.cshtml" />
+    <Content Include="Views\Login\EmbalagemAlterar.cshtml" />
+    <Content Include="Views\Login\EntregadorAlterar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

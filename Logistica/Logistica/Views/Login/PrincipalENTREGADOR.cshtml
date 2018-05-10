@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "PrincipalENTREGADOR";
+}
+
+<h2>Minhas Entregas (Pedidos)</h2>
+<table class="table table-hover">
+    <tr>
+        <th scope="col">Solicitante</th>
+        <th scope="col">Produto</th>
+        <th scope="col">CEP</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Logradouro</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Complemento</th>
+        <th scope="col">Data de Entrega</th>
+        <th scope="col">Alterar Status</th>
+    </tr>
+    <tbody>
+        <tr class="table-active">
+            <td>Solicitante Aqui</td>
+            <td>Produto Aqui</td>
+            <td>CEP Aqui</td>
+            <td>Estado Aqui</td>
+            <td>Cidade Aqui</td>
+            <td>Bairro Aqui</td>
+            <td>Logradouro Aqui</td>
+            <td>Numero Aqui</td>
+            <td>Complemento Aqui</td>
+            <td>Data de Entrega Aqui</td>
+            @using (Html.BeginForm("EntregadorAlterar", "Login", FormMethod.Post))
+            {
+                <td><input type="submit" value="Alterar" class="btn btn-success" /></td>
+            }
+        </tr>
+    </tbody>
+</table>

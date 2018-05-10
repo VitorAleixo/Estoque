@@ -29,11 +29,14 @@ namespace Logistica.DAL
                 [XmlElement("CPF")]
                 public String CPF { get; set; }
 
+                [XmlElement("Usuario")]
+                public String Usuario { get; set; }
+
                 [XmlElement("Telefone")]
                 public String Telefone { get; set; }
 
-                [XmlElement("IdEndereco")]
-                public int IdEndereco { get; set; }
+                [XmlElement("Role")]
+                public String Role { get; set; }
 
             }
 
@@ -54,7 +57,9 @@ namespace Logistica.DAL
                         con = ConnectionFactory.getConnection();
                         con.Open();
 
-                        comando = "SELECT Nome, CPF, Telefone, IdEndereco FROM Cliente ORDER BY Nome;";
+                        comando = "SELECT Nome, CPF, Usuario, Telefone, NomeRole  " +
+                        "FROM Usuario INNER JOIN Role ON Usuario.IdRole = Role.IdRole " +
+                        "ORDER BY NomeRole;";
 
                         XmlSerializer ser = new XmlSerializer(typeof(ListaCliente));
                         list = new ListaCliente();
@@ -72,8 +77,9 @@ namespace Logistica.DAL
 
                                         Nome = rdr.GetString(0),
                                         CPF = rdr.GetString(1),
-                                        Telefone = rdr.GetString(2),
-                                        IdEndereco = rdr.GetInt32(3)
+                                        Usuario = rdr.GetString(2),
+                                        Telefone = rdr.GetString(3),
+                                        Role = rdr.GetString(4)
                                     });
                                 }
                             }

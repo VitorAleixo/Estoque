@@ -37,11 +37,13 @@ namespace Logistica.WebService
         [WebMethod]
         public bool CadastroCliente(string Nome
                                   , string CPF
+                                  , string Usuario
+                                  , string Senha
                                   , string Telefone
-                                  , int IdEndereco)
+                                  , int IdRole)
         {
             ClienteDAO cliente= new ClienteDAO();
-            cliente.Cadastrar(Nome, CPF, Telefone, IdEndereco);
+            cliente.Cadastrar(Nome, CPF,Usuario,Senha, Telefone, IdRole);
             if (cliente.valor == 1)
             {
                 return true;
@@ -58,6 +60,15 @@ namespace Logistica.WebService
             BuscaClienteDAO.Program.RetornarCliente();
 
             return BuscaClienteDAO.Program.list;
+        }
+
+        [WebMethod]
+        public string RetornaRole(string Usuario)
+        {
+            ClienteDAO cliente = new ClienteDAO();
+            var retornoCliente = cliente.BuscaRole(Usuario);
+
+            return retornoCliente;
         }
 
         [WebMethod]
@@ -115,6 +126,23 @@ namespace Logistica.WebService
             BuscaPedidoDAO.Program.RetornarPedido();
 
             return BuscaPedidoDAO.Program.list;
+        }
+
+        [WebMethod]
+        public bool UpdateEntrega(int IdEntrega
+                                  , string Status)
+
+        {
+            EntregaDAO entrega = new EntregaDAO();
+            entrega.AtualizarStatus(IdEntrega, Status);
+            if (entrega.valor == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

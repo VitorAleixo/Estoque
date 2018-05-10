@@ -12,13 +12,12 @@ namespace Logistica.DAL
         {
             try
             {
-                return new SqlConnection("Data Source=VAIO;Initial Catalog=Logistica;User ID='sa';Password='sa'");
+                return new SqlConnection("Data Source=SERVER05;Initial Catalog=Logistica;User ID='ENTERPRISING';Password='ENTERPRISING'");
 
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
-
             }
         }
     }

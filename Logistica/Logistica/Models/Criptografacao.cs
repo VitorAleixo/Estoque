@@ -11,17 +11,24 @@ namespace Logistica.Models
     {
         public string SHA256(string valor)
         {
-            UnicodeEncoding UE = new UnicodeEncoding();
-            byte[] HashValue, MessageBytes = UE.GetBytes(valor);
-            SHA256Managed SHhash = new SHA256Managed();
-            string strHex = "";
-
-            HashValue = SHhash.ComputeHash(MessageBytes);
-            foreach (byte b in HashValue)
+            try
             {
-                strHex += String.Format("{0:x2}", b);
+                UnicodeEncoding UE = new UnicodeEncoding();
+                byte[] HashValue, MessageBytes = UE.GetBytes(valor);
+                SHA256Managed SHhash = new SHA256Managed();
+                string strHex = "";
+
+                HashValue = SHhash.ComputeHash(MessageBytes);
+                foreach (byte b in HashValue)
+                {
+                    strHex += String.Format("{0:x2}", b);
+                }
+                return strHex;
             }
-            return strHex;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
         }
     }
 }

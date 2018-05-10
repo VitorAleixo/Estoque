@@ -12,9 +12,44 @@ namespace Logistica.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Principal()
+        public ActionResult PrincipalEMBALAGEM()
         {
-            ViewBag.Message = "Principal";
+            ViewBag.Message = "PrincipalEMBALAGEM";
+
+            return View();
+        }
+
+        public ActionResult PrincipalENTREGADOR()
+        {
+            ViewBag.Message = "PrincipalENTREGADOR";
+
+            return View();
+        }
+
+        public ActionResult PrincipalERRO()
+        {
+            ViewBag.Message = "PrincipalERRO";
+
+            return View();
+        }
+
+        public ActionResult PrincipalUSUARIO()
+        {
+            ViewBag.Message = "PrincipalUSUARIO";
+
+            return View();
+        }
+
+        public ActionResult EmbalagemAlterar()
+        {
+            ViewBag.Message = "EmbalagemAlterar";
+
+            return View();
+        }
+
+        public ActionResult EntregadorAlterar()
+        {
+            ViewBag.Message = "EntregadorAlterar";
 
             return View();
         }
@@ -38,7 +73,24 @@ namespace Logistica.Controllers
 
                 if (servico.Autenticar(Usuario, SenhaCriptografada) == true)
                 {
-                    return RedirectToAction("Principal");
+                    var resultado = servico.RetornaRole(Usuario);
+
+                    if (resultado == "EMBALAGEM")
+                    {
+                        return RedirectToAction("PrincipalEMBALAGEM");
+                    }
+                    else if (resultado == "USUARIO")
+                    {
+                        return RedirectToAction("PrincipalUSUARIO");
+                    }
+                    else if (resultado == "ENTREGADOR")
+                    {
+                        return RedirectToAction("PrincipalENTREGADOR");
+                    }
+                    else
+                    {
+                        return RedirectToAction("PrincipalERRO");
+                    }
                 }
                 else
                 {

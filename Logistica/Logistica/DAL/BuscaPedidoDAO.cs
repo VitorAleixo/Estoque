@@ -25,14 +25,32 @@ namespace Logistica.DAL
             [XmlElement("IdPedido")]
             public int IdPedido { get; set; }
 
-            [XmlElement("IdCliente")]
-            public int IdCliente { get; set; }
+            [XmlElement("NomeSolicitante")]
+            public String NomeSolicitante { get; set; }
 
-            [XmlElement("IdProduto")]
-            public int IdProduto { get; set; }
+            [XmlElement("NomeProduto")]
+            public String NomeProduto { get; set; }
 
-            [XmlElement("IdEndereco")]
-            public int IdEndereco { get; set; }
+            [XmlElement("CEP")]
+            public String CEP { get; set; }
+
+            [XmlElement("Estado")]
+            public String Estado { get; set; }
+
+            [XmlElement("Cidade")]
+            public String Cidade { get; set; }
+
+            [XmlElement("Bairro")]
+            public String Bairro { get; set; }
+
+            [XmlElement("Logradouro")]
+            public String Logradouro { get; set; }
+
+            [XmlElement("Numero")]
+            public int Numero { get; set; }
+
+            [XmlElement("Complemento")]
+            public String Complemento { get; set; }
 
             [XmlElement("DataDeEntrega")]
             public string DataDeEntrega { get; set; }
@@ -56,7 +74,11 @@ namespace Logistica.DAL
                     con = ConnectionFactory.getConnection();
                     con.Open();
 
-                    comando = "SELECT IdPedido, IdCliente, IdProduto, IdEndereco, DataDeEntrega FROM Pedido ORDER BY DataDeEntrega;";
+                    comando = "SELECT IdPedido, u.Nome AS Nome_Solicitante, p.Descricao AS Nome_Produto, e.CEP, e.Estado, e.Cidade, e.Bairro, e.Logradouro, e.Numero, e.Complemento, DataDeEntrega " +
+                        "FROM Pedido pe INNER JOIN Produto p  ON pe.IdProduto = p.IdProduto  " +
+                        "INNER JOIN Endereco e ON e.IdEndereco = pe.IdEndereco " +
+                        "INNER JOIN Usuario u ON pe.IdUsuario = u.IdUsuario  " +
+                        "ORDER BY DataDeEntrega; ";
 
                     XmlSerializer ser = new XmlSerializer(typeof(ListaPedido));
                     list = new ListaPedido();
@@ -72,10 +94,16 @@ namespace Logistica.DAL
                                 list.Items.Add(new Pedido
                                 {
                                     IdPedido = rdr.GetInt32(0),
-                                    IdCliente = rdr.GetInt32(1),
-                                    IdProduto = rdr.GetInt32(2),
-                                    IdEndereco = rdr.GetInt32(3),
-                                    DataDeEntrega = rdr.GetDateTime(4).ToString("dd/MM/yyyy").Replace("-","/"),
+                                    NomeSolicitante = rdr.GetString(1),
+                                    NomeProduto = rdr.GetString(2),
+                                    CEP = rdr.GetString(3),
+                                    Estado = rdr.GetString(4),
+                                    Cidade = rdr.GetString(5),
+                                    Bairro = rdr.GetString(6),
+                                    Logradouro = rdr.GetString(7),
+                                    Numero = rdr.GetInt32(8),
+                                    Complemento = rdr.GetString(9),
+                                    DataDeEntrega = rdr.GetDateTime(10).ToString("dd/MM/yyyy").Replace("-","/"),
                                 });
                             }
                         }

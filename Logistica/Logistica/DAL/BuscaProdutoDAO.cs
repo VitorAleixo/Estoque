@@ -22,8 +22,14 @@ namespace Logistica.DAL
         }
         public class Produto
         {
-            [XmlElement("IdTipo_Produto")]
-            public int IdTipo_Produto { get; set; }
+            [XmlElement("IdProduto")]
+            public int IdProduto { get; set; }
+
+            [XmlElement("Tipo")]
+            public string Tipo { get; set; }
+
+            [XmlElement("Fragilidade")]
+            public String Fragilidade { get; set; }
 
             [XmlElement("Descricao")]
             public String Descricao { get; set; }
@@ -65,7 +71,9 @@ namespace Logistica.DAL
                     con = ConnectionFactory.getConnection();
                     con.Open();
 
-                    comando = "SELECT IdTipo_Produto, Descricao, Quantidade, Valor, Peso, TamanhoX, TamanhoY, TamanhoZ FROM Produto ORDER BY IdTipo_Produto;";
+                    comando = "SELECT IdProduto, p.Tipo, p.Fragilidade, Descricao, Quantidade, Valor, Peso, TamanhoX, TamanhoY, TamanhoZ" +
+                        " FROM Produto INNER JOIN Tipo_Produto p ON Produto.IdTipo_Produto = p.IdTipo_Produto" +
+                        " ORDER BY p.Tipo;";
 
                     XmlSerializer ser = new XmlSerializer(typeof(ListaProduto));
                     list = new ListaProduto();
@@ -81,14 +89,16 @@ namespace Logistica.DAL
                                 list.Items.Add(new Produto
                                 {
 
-                                    IdTipo_Produto = rdr.GetInt32(0),
-                                    Descricao = rdr.GetString(1),
-                                    Quantidade = rdr.GetInt32(2),
-                                    Valor = rdr.GetDouble(3),
-                                    Peso = rdr.GetDouble(4),
-                                    TamanhoX = rdr.GetDouble(5),
-                                    TamanhoY = rdr.GetDouble(6),
-                                    TamanhoZ = rdr.GetDouble(7),
+                                    IdProduto = rdr.GetInt32(0),
+                                    Tipo = rdr.GetString(1),
+                                    Fragilidade = rdr.GetString(2),
+                                    Descricao = rdr.GetString(3),
+                                    Quantidade = rdr.GetInt32(4),
+                                    Valor = rdr.GetDouble(5),
+                                    Peso = rdr.GetDouble(6),
+                                    TamanhoX = rdr.GetDouble(7),
+                                    TamanhoY = rdr.GetDouble(8),
+                                    TamanhoZ = rdr.GetDouble(9),
                                 });
                             }
                         }

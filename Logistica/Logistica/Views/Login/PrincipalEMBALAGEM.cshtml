@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "PrincipalEMBALAGEM";
+}
+
+<h2>PrincipalEMBALAGEM</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th scope="col">Produto</th>
+        <th scope="col">Alterar Status</th>
+    </tr>
+    <tbody>
+        <tr class="table-active">
+            <td>Produto Aqui</td>
+           @using (Html.BeginForm("EmbalagemAlterar", "Login", FormMethod.Post))
+           {
+            <td><input type="submit" value="Alterar" class="btn btn-success" /></td>
+           }
+        </tr>
+    </tbody>
+</table>
