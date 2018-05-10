@@ -1,0 +1,39 @@
+﻿@model Logistica.Models.Login
+
+@{
+    ViewBag.Title = "Efetuar Login";
+}
+
+<h2 class="headertekst">Login</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+          @Html.LabelFor(model => model.Usuario)
+            @Html.EditorFor(model => model.Usuario)
+            @Html.ValidationMessageFor(model => model.Usuario, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senha)
+            @Html.EditorFor(model => model.Senha)
+            @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+        </div>
+     
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-success" />
+            </div>
+
+        </div>
+    </div>
+
+  
+}
