@@ -25,7 +25,7 @@ namespace Logistica.DAL
             con.Open();
 
             cmd = new SqlCommand("INSERT INTO Pedido(IdUsuario, IdProduto, IdEndereco, DataDeEntrega) VALUES " +
-                "(@IdCliente, @IdProduto, @IdEndereco, @DataDeEntrega);", con);
+                "(@IdUsuario, @IdProduto, @IdEndereco, @DataDeEntrega);", con);
 
             cmd.Parameters.AddWithValue("@IdUsuario", IdUsuario);
             cmd.Parameters.AddWithValue("@IdProduto", IdProduto);

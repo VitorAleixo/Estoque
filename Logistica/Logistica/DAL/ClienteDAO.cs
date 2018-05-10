@@ -26,8 +26,8 @@ namespace Logistica.DAL
                 con = ConnectionFactory.getConnection();
                 con.Open();
 
-                cmd = new SqlCommand("INSERT INTO Cliente(Nome, CPF, Usuario, Senha, Telefone, IdRole) VALUES " +
-                    "(@Nome, @CPF, @Telefone, @IdEndereco);", con);
+                cmd = new SqlCommand("INSERT INTO Usuario(Nome, CPF, Usuario, Senha, Telefone, IdRole) VALUES " +
+                    "(@Nome, @CPF, @Usuario, @Senha, @Telefone, @IdRole);", con);
 
                 cmd.Parameters.AddWithValue("@Nome", Nome);
                 cmd.Parameters.AddWithValue("@CPF", CPF);
