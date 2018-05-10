@@ -10,17 +10,18 @@ namespace Logistica.DAL
 
     public class UsuarioDAO
     {
-        public string connectionString = "Data Source=MEUPC;Initial Catalog=Logistica;User ID=sa;Password=sa";
+        SqlConnection con = null;
+        SqlCommand cmd = null;
         public bool Validar { get; set; } = false;
 
         public void Login (string Usuario, string SenhaCriptografada)
-        { 
-            SqlConnection con = new SqlConnection(connectionString);
+        {
+            con = ConnectionFactory.getConnection();
             con.Open();
-            Login log = new Login();
             string result = "";
-            string comando = "SELECT Senha FROM Usuario WHERE Usuario = '" + Usuario + "';";
-            SqlCommand cmd = new SqlCommand(comando, con);
+            cmd = new SqlCommand("SELECT Senha FROM Entregador WHERE Usuario = @Usuario;", con);
+            cmd.Parameters.AddWithValue("@Usuario", Usuario);
+
             SqlDataReader resultado = cmd.ExecuteReader();
             
             while (resultado.Read())

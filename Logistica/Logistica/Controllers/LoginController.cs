@@ -1,5 +1,6 @@
 ﻿using Logistica.DAL;
 using Logistica.Models;
+using Logistica.WebService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +33,10 @@ namespace Logistica.Controllers
                 Criptografacao encrypt = new Criptografacao();
                 string SenhaCriptografada = encrypt.SHA256(Senha);
 
-                UsuarioDAO UserLogin = new UsuarioDAO();
-                UserLogin.Login(Usuario, SenhaCriptografada);
+                ServicoWeb servico = new ServicoWeb();
+                
 
-
-                if (UserLogin.Validar == true)
+                if (servico.Autenticar(Usuario, SenhaCriptografada) == true)
                 {
                     return RedirectToAction("Principal");
                 }
@@ -48,7 +48,7 @@ namespace Logistica.Controllers
             }
             catch (Exception ex)
             {
-                return null;
+               throw ex;
             }
         }
 
